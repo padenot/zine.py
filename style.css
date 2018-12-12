@@ -1,0 +1,62 @@
+@page {
+  size: A4 landscape;
+  margin: 0mm;
+}
+img.photo {
+  max-height: 14.85cm;
+  max-width: 21cm;
+  transform: scale(0.9);
+}
+img.cover {
+  height: 21cm;
+  width: 14.85cm;
+  transform: scale(0.9);
+}
+.sheet {
+  width: 29.7cm;
+  height: 21cm;
+  position: relative;
+}
+
+.page {
+  object-fit: contain;
+}
+
+.left {
+  border-top: 1px dotted gray;
+}
+
+.cover.left {
+  transform: none;
+  transform-origin: 0% 0%;
+  position: absolute;
+  top: 0px;
+  left: 0cm;
+  width: 14.85cm;
+  height: 21cm;
+}
+
+.cover.right{
+ position: absolute;
+ top: 0px;
+ right: 0cm;
+ page-break-after: always;
+ width: 14.85cm;
+ height: 21cm;
+}
+
+.page.left {
+  position: absolute;
+  top: 0px;
+  left: 14.85cm;
+  transform: rotate(90deg);
+  transform-origin: 0% 0%;
+}
+.page.right {
+  position: absolute;
+  top: 0px;
+  right: 14.85cm;
+  transform: rotate(-90deg);
+  transform-origin: 100% 0%;
+  page-break-after: always;
+}
