@@ -8,9 +8,9 @@ it's intended to be printed on a printer that can print both sides and then fold
 
 # deps
 
-- (weasyprint)[https://weasyprint.org/]
-- (jinja2)[http://jinja.pocoo.org/docs/2.10/]
-- (pillow)[https://pillow.readthedocs.io/en/5.3.x/]
+- [weasyprint](https://weasyprint.org/)
+- [jinja2](http://jinja.pocoo.org/docs/2.10/)
+- [pillow](https://pillow.readthedocs.io/en/5.3.x/)
 
 ```sh
 pip install WeasyPrint Jinja2 Pillow
