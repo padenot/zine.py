@@ -7,10 +7,6 @@ import glob
 import sys
 import os
 
-import logging
-logger = logging.getLogger('weasyprint')
-logger.addHandler(logging.FileHandler('weasyprint.log'))
-
 def remove_rotated():
     rotated = glob.glob("rotated*")
     for i in rotated:
