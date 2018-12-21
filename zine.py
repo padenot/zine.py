@@ -6,15 +6,31 @@ from PIL import Image
 import glob
 import sys
 import os
+import argparse
+import random
+
+base_path = os.path.dirname(os.path.realpath(__file__))
 
 def remove_rotated():
     rotated = glob.glob("rotated*")
     for i in rotated:
         os.remove(i)
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-c", "--count", metavar='N', help="number of photos in the zine",
+                    type=int)
+parser.add_argument("-o", "--output", help="destination file")
+args = parser.parse_args()
+
 remove_rotated()
 
 names = glob.glob('*.jpg')
+
+output_file = "output.pdf"
+photo_count = len(names)
+
+if args.output:
+    output_file = args.output
 
 names.sort()
 
@@ -30,9 +46,14 @@ if "back.jpg" not in names:
 
 names.remove("back.jpg")
 
+if args.count:
+    if len(names) < args.count:
+        print("not enough photos for the specificed count")
+        sys.exit(1)
+    while len(names) != args.count:
+        names.pop(random.randrange(len(names)))
 
 # mangle for printing a booklet
-
 uturn = list()
 
 for i in range(int(len(names) / 2)):
@@ -63,10 +84,10 @@ for idx, f in enumerate(mangled):
         mangled[idx] = outname
         out.save(outname)
 
-with open('template.html.jinja2') as file_:
+with open(base_path+'/template.html.jinja2') as file_:
     template = Template(file_.read())
     source = template.render(photos=mangled)
-    with open('style.css') as style_:
+    with open(base_path+'/style.css') as style_:
         html = HTML(string=source, base_url=os.getcwd())
         css = CSS(string=style_.read())
         html.write_pdf('output.pdf', stylesheets=[css])
